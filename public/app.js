@@ -182,7 +182,7 @@ jQuery(function($){
             // Player
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
             App.$doc.on('click', '#btnStart',App.Player.onPlayerStartClick);
-            App.$doc.on('click', '.btnAnswer',App.Player.onPlayerAnswerClick);
+            App.$doc.on('touchstart', '.btnAnswer',App.Player.onPlayerAnswerClick);
             App.$doc.on('click', '#btnPlayerRestart', App.Player.onPlayerRestart);
         },
 
