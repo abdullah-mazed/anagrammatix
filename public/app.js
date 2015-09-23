@@ -175,6 +175,8 @@ jQuery(function($){
         bindEvents: function () {
             // Host
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
+            App.$doc.on('click', '#btnNextRound', App.Host.onNextRoundClick);
+            
 
             // Player
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
@@ -329,7 +331,8 @@ jQuery(function($){
              */
             newWord : function(data) {
                 // Insert the new word into the DOM
-                $('#hostWord').text(data.word);
+//                $('#hostWord').text(data.word);
+                $('#hostWord').text("Round: " + App.currentRound);
                 App.doTextFit('#hostWord');
                 
                 // Update the data for the current round
@@ -379,6 +382,18 @@ jQuery(function($){
                     $('#hostWord').text("Round " + App.currentRound + " : " + App.Host.currentPlayerAnswers);
                     App.doTextFit('#hostWord');
                 }
+            },
+            
+            onNextRoundClick: function() {
+                // Advance the round
+                App.currentRound += 1;
+
+                // Prepare data to send to the server
+                var data = {
+                    gameId : App.gameId,
+                    round : App.currentRound
+                }
+                IO.socket.emit('hostNextRound',data);
             },
 
 

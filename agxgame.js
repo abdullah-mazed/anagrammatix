@@ -158,7 +158,6 @@ function playerRestart(data) {
  * @param gameId The room identifier
  */
 function sendWord(wordPoolIndex, gameId) {
-    wordPoolIndex = 0;//game type = 0 = buzz always
     var data = getWordData(wordPoolIndex);
     io.sockets.in(data.gameId).emit('newWordData', data);
 }
@@ -170,7 +169,8 @@ function sendWord(wordPoolIndex, gameId) {
  * @param i The index of the wordPool.
  * @returns {{round: *, word: *, answer: *, list: Array}}
  */
-function getWordData(i){
+function getWordData(round){
+    var i = 0;
     // Randomize the order of the available words.
     // The first element in the randomized array will be displayed on the host screen.
     // The second element will be hidden in a list of decoys as the correct answer
@@ -185,7 +185,7 @@ function getWordData(i){
 
     // Package the words into a single object.
     var wordData = {
-        round: i,
+        round: round,
         word : words[0],   // Displayed Word
         answer : words[1], // Correct Answer
         list : decoys      // Word list for player (decoys and answer)
