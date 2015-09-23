@@ -541,7 +541,7 @@ jQuery(function($){
                     document.getElementById('btnStart').style.visibility = 'hidden';
                     $('#playerWaitingMessage')
                         .append('<p/>')
-                        .text('Joined Game ' + data.gameId + '. Please wait for game to begin.');
+                        .text('You are in! Now just wait for the game to begin.');
                 }
             },
 
