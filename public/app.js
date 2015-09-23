@@ -202,6 +202,8 @@ jQuery(function($){
            ******************************* */
         Host : {
 
+            roomSizeToStart : 5,
+            
             /**
              * Contains references to player data
              */
@@ -280,9 +282,9 @@ jQuery(function($){
 
                 // Increment the number of players in the room
                 App.Host.numPlayersInRoom += 1;
-
+                console.log('player count = ' + App.Host.numPlayersInRoom + ' total expected = ' + App.Host.roomSizeToStart);
                 // If two players have joined, start the game!
-                if (App.Host.numPlayersInRoom === 2) {
+                if (App.Host.numPlayersInRoom === App.Host.roomSizeToStart) {
                     // console.log('Room is full. Almost ready!');
 
                     // Let the server know that two players are present.
