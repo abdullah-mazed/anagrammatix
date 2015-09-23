@@ -374,7 +374,7 @@ jQuery(function($){
 //                    }
                     
                 
-                    App.Host.currentPlayerAnswers.push(data.playerName + ", ");
+                    App.Host.currentPlayerAnswers.push(data.playerName);
                     
                     $('#hostWord').text("Round " + App.currentRound + " : " + App.Host.currentPlayerAnswers);
                     App.doTextFit('#hostWord');
@@ -490,6 +490,8 @@ jQuery(function($){
                     playerName: App.Player.myName
                 }
                 IO.socket.emit('playerAnswer',data);
+                $('#gameArea')
+                    .html('<div class="gameOver">Answer submitted for Round ' + App.currentRound + '</div>');
             },
 
             /**
