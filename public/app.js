@@ -526,6 +526,7 @@ jQuery(function($){
                 }
                 IO.socket.emit('playerRestart',data);
                 App.currentRound = 0;
+                document.getElementById('btnStart').style.visibility = 'hidden';
                 $('#gameArea').html("<h3>Waiting on host to start new game.</h3>");
             },
 
@@ -537,7 +538,7 @@ jQuery(function($){
                 if(IO.socket.socket.sessionid === data.mySocketId){
                     App.myRole = 'Player';
                     App.gameId = data.gameId;
-
+                    document.getElementById('btnStart').style.visibility = 'hidden';
                     $('#playerWaitingMessage')
                         .append('<p/>')
                         .text('Joined Game ' + data.gameId + '. Please wait for game to begin.');
