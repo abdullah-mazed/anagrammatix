@@ -567,17 +567,20 @@ jQuery(function($){
                 // received from the server.
                 $.each(data.list, function(){
                     $list                                //  <ul> </ul>
-                        .append( $('<li/>')              //  <ul> <li> </li> </ul>
-                            .append( $('<button/>')      //  <ul> <li> <button> </button> </li> </ul>
-                                .addClass('btnAnswer')   //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
-                                .addClass('btn')         //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
-                                .val(this)               //  <ul> <li> <button class='btnAnswer' value='word'> </button> </li> </ul>
-                                .html(this)              //  <ul> <li> <button class='btnAnswer' value='word'>word</button> </li> </ul>
-                            )
-                        )
+//                        .append( $('<li/>')              //  <ul> <li> </li> </ul>
+//                            .append( $('<input/>')      //  <ul> <li> <button> </button> </li> </ul>
+//                                .addClass('btnAnswer')   //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
+//                                .addClass('btn')         //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
+//                                .val(this)               //  <ul> <li> <button class='btnAnswer' value='word'> </button> </li> </ul>
+//                                .html(this)              //  <ul> <li> <button class='btnAnswer' value='word'>word</button> </li> </ul>
+//                            )
+//                        )
+                     var $btn = '<input type="image" class="btnAnswer" value="' + this + '" src="img/buzzer.png" alt="Image input control"></input>'
+                     $list.append($btn);
                 });
 
                 // Insert the list onto the screen.
+               
                 $('#gameArea').html($list);
             },
 
