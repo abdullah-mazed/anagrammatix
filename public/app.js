@@ -202,7 +202,7 @@ jQuery(function($){
            ******************************* */
         Host : {
 
-            roomSizeToStart : 5,
+            roomSizeToStart : 2,
             
             /**
              * Contains references to player data
