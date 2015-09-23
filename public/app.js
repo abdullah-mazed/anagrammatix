@@ -474,7 +474,7 @@ jQuery(function($){
 
                 // collect data to send to the server
                 var data = {
-                    gameId : +($('#inputGameId').val()),
+                    gameId : "eid",//+($('#inputGameId').val()),
                     playerName : $('#inputPlayerName').val() || 'anon',
                     playerId: App.mySocketId
                 };
