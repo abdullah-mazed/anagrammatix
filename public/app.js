@@ -164,6 +164,7 @@ jQuery(function($){
             // Templates
             App.$gameArea = $('#gameArea');
             App.$templateIntroScreen = $('#intro-screen-template').html();
+            App.$templateIntroScreenHost = $('#intro-screen-template-host').html();
             App.$templateNewGame = $('#create-game-template').html();
             App.$templateJoinGame = $('#join-game-template').html();
             App.$hostGame = $('#host-game-template').html();
@@ -194,7 +195,12 @@ jQuery(function($){
          * (with Start and Join buttons)
          */
         showInitScreen: function() {
-            App.$gameArea.html(App.$templateIntroScreen);
+            var isHost = window.location.href.indexOf("host") >= 0;
+            if (isHost) {
+                App.$gameArea.html(App.$templateIntroScreenHost);
+            } else {
+                App.$gameArea.html(App.$templateIntroScreen);
+            }
             App.doTextFit('.title');
         },
 
