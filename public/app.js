@@ -225,6 +225,8 @@ jQuery(function($){
              * A reference to the correct answer for the current round.
              */
             currentCorrectAnswer: '',
+            
+            currentPlayerAnswers: [], //holds playerid, and answers in order of who clicked fast
 
             /**
              * Handler for the "Start" button on the Title Screen.
@@ -329,10 +331,11 @@ jQuery(function($){
                 // Insert the new word into the DOM
                 $('#hostWord').text(data.word);
                 App.doTextFit('#hostWord');
-
+                
                 // Update the data for the current round
                 App.Host.currentCorrectAnswer = data.answer;
                 App.Host.currentRound = data.round;
+                App.Host.currentPlayerAnswers = [];
             },
 
             /**
@@ -348,27 +351,33 @@ jQuery(function($){
                     // Get the player's score
                     var $pScore = $('#' + data.playerId);
 
-                    // Advance player's score if it is correct
-                    if( App.Host.currentCorrectAnswer === data.answer ) {
-                        // Add 5 to the player's score
-                        $pScore.text( +$pScore.text() + 5 );
-
-                        // Advance the round
-                        App.currentRound += 1;
-
-                        // Prepare data to send to the server
-                        var data = {
-                            gameId : App.gameId,
-                            round : App.currentRound
-                        }
-
-                        // Notify the server to start the next round.
-                        IO.socket.emit('hostNextRound',data);
-
-                    } else {
-                        // A wrong answer was submitted, so decrement the player's score.
-                        $pScore.text( +$pScore.text() - 3 );
-                    }
+//                    // Advance player's score if it is correct
+//                    if( App.Host.currentCorrectAnswer === data.answer ) {
+//                        // Add 5 to the player's score
+//                        $pScore.text( +$pScore.text() + 5 );
+//
+//                        // Advance the round
+//                        App.currentRound += 1;
+//
+//                        // Prepare data to send to the server
+//                        var data = {
+//                            gameId : App.gameId,
+//                            round : App.currentRound
+//                        }
+//
+//                        // Notify the server to start the next round.
+//                        IO.socket.emit('hostNextRound',data);
+//
+//                    } else {
+//                        // A wrong answer was submitted, so decrement the player's score.
+//                        $pScore.text( +$pScore.text() - 3 );
+//                    }
+                    
+                
+                    App.Host.currentPlayerAnswers.push(data.playerName + ", ");
+                    
+                    $('#hostWord').text("Round " + App.currentRound + " : " + App.Host.currentPlayerAnswers);
+                    App.doTextFit('#hostWord');
                 }
             },
 
@@ -451,7 +460,8 @@ jQuery(function($){
                 // collect data to send to the server
                 var data = {
                     gameId : +($('#inputGameId').val()),
-                    playerName : $('#inputPlayerName').val() || 'anon'
+                    playerName : $('#inputPlayerName').val() || 'anon',
+                    playerId: App.mySocketId
                 };
 
                 // Send the gameId and playerName to the server
@@ -476,7 +486,8 @@ jQuery(function($){
                     gameId: App.gameId,
                     playerId: App.mySocketId,
                     answer: answer,
-                    round: App.currentRound
+                    round: App.currentRound,
+                    playerName: App.Player.myName
                 }
                 IO.socket.emit('playerAnswer',data);
             },

@@ -72,7 +72,8 @@ function hostStartGame(gameId) {
  * @param data Sent from the client. Contains the current round and gameId (room)
  */
 function hostNextRound(data) {
-    if(data.round < wordPool.length ){
+    var shouldContinue = true;//data.round < wordPool.length
+    if(shouldContinue){
         // Send a new set of words back to the host and players.
         sendWord(data.round, data.gameId);
     } else {
@@ -157,6 +158,7 @@ function playerRestart(data) {
  * @param gameId The room identifier
  */
 function sendWord(wordPoolIndex, gameId) {
+    wordPoolIndex = 0;//game type = 0 = buzz always
     var data = getWordData(wordPoolIndex);
     io.sockets.in(data.gameId).emit('newWordData', data);
 }
