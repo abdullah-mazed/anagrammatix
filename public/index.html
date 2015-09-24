@@ -16,10 +16,19 @@
             return "Aam.. r u sure to leave Eid game? Reconfirm from Gagan please.";
         };
     </script>
+    
 </head>
 
 <body>
 
+    <audio id="buzzsound" src="sound/buzz.wav"></audio>
+    
+    <script>
+    function buzzSound(){
+       var audio = document.getElementById("buzzsound");
+       audio.play();
+                 }
+   </script>
 
     <div id="gameArea">
         <!-- This is where the templates defined below will be used -->
@@ -36,7 +45,7 @@
 
             <div class="buttons">
 
-                <button id="btnJoinGame" class="btn">JOIN</button>
+                <button id="btnJoinGame" class="btn" onclick="buzzSound()">JOIN</button>
                 <div style="clear:both"></div>
             </div>
 
@@ -54,8 +63,8 @@
 
             <div class="buttons">
 
-                <button id="btnCreateGame" class="btn left">CREATE</button>
-                <button id="btnJoinGame" class="btn right">JOIN</button>
+                <button id="btnCreateGame" class="btn left" onclick="buzzSound()">CREATE</button>
+                <button id="btnJoinGame" class="btn right" onclick="buzzSound()">JOIN</button>
                 <div style="clear:both"></div>
             </div>
 

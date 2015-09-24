@@ -400,6 +400,19 @@ jQuery(function($){
                     round : App.currentRound
                 }
                 IO.socket.emit('hostNextRound',data);
+                
+                var myAudio = document.createElement('audio');
+
+if (myAudio.canPlayType('audio/mpeg')) {
+  myAudio.setAttribute('src','sound/beep.mp3');
+}
+
+if (myAudio.canPlayType('audio/ogg')) {
+  myAudio.setAttribute('src','sound/beep.ogg');
+}
+
+
+myAudio.play();
             },
 
 
@@ -513,6 +526,21 @@ jQuery(function($){
                 IO.socket.emit('playerAnswer',data);
                 $('#gameArea')
                     .html('<div class="gameOver">Answer submitted for Round ' + App.currentRound + '</div>');
+                buzzSound();
+                
+//                var myAudio = document.createElement('audio');
+//
+//if (myAudio.canPlayType('audio/mpeg')) {
+//  myAudio.setAttribute('src','sound/beep.mp3');
+//}
+//
+//if (myAudio.canPlayType('audio/ogg')) {
+//  myAudio.setAttribute('src','sound/beep.ogg');
+//}
+//
+//alert('play');
+//
+//myAudio.play();
             },
 
             /**
