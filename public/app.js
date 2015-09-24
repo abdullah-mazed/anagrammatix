@@ -177,6 +177,7 @@ jQuery(function($){
             // Host
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
             App.$doc.on('click', '#btnNextRound', App.Host.onNextRoundClick);
+            App.$doc.on('click', '#btnFirstRound', App.Host.onFirstRoundClick);
             
 
             // Player
@@ -210,7 +211,7 @@ jQuery(function($){
            ******************************* */
         Host : {
 
-            roomSizeToStart : 2,
+            roomSizeToStart : 30,
             
             /**
              * Contains references to player data
@@ -284,12 +285,18 @@ jQuery(function($){
                     App.Host.displayNewGameScreen();
                 }
                 // Update host screen
-                $('#playersWaiting')
-                    .append('<p/>')
-                    .text('' + data.playerName + ' এর কেউ ঢুকছে ');
+                
+                
 
                 // Store the new player's data on the Host.
                 App.Host.players.push(data);
+                
+                var waitingText = "";
+                for (var i in App.Host.players) {
+                    waitingText += ('' + App.Host.players[i].playerName + ' এর কেউ ঢুকছে <br/>');
+                }
+                $('#playersWaiting')
+                    .html(waitingText);
 
                 // Increment the number of players in the room
                 App.Host.numPlayersInRoom += 1;
@@ -389,6 +396,15 @@ jQuery(function($){
                     $('#hostWord').text("টিপ দিল এই Round " + App.currentRound + " এ : " + App.Host.currentPlayerAnswers);
                     App.doTextFit('#hostWord');
                 }
+            },
+            
+            onFirstRoundClick:function() {
+                App.currentRound = 0;
+                var data = {
+                    gameId : App.gameId,
+                    round : App.currentRound
+                };
+                IO.socket.emit('hostRoomFull',App.gameId);
             },
             
             onNextRoundClick: function() {

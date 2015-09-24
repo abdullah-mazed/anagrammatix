@@ -74,6 +74,9 @@
 
     <!-- This screen appears when a user clicks "CREATE" on the Title Screen -->
     <script id="create-game-template" type="text/template">
+        <div class="buttons">
+            <button id="btnFirstRound" class="btn"> শুরু </button>
+        </div>
         <div class="createGameWrapper">
 
             <div class="info">মোবাইলের Browser দিয়ে ঢুকুন :  </div>
@@ -82,7 +85,7 @@
             <div class="info"></div>
             <div id="spanNewGameCode" class="gameId">Error!</div>
 
-            <div id="playersWaiting"></div>
+            <div id="playersWaiting" class="playerWaitingMessage"></div>
         </div>
     </script>
 
