@@ -195,7 +195,7 @@ jQuery(function($){
          * (with Start and Join buttons)
          */
         showInitScreen: function() {
-            var isHost = window.location.href.indexOf("host") >= 0;
+            var isHost = window.location.href.indexOf("host=1") >= 0;
             if (isHost) {
                 App.$gameArea.html(App.$templateIntroScreenHost);
             } else {
@@ -266,11 +266,12 @@ jQuery(function($){
                 App.$gameArea.html(App.$templateNewGame);
 
                 // Display the URL on screen
-                $('#gameURL').text(window.location.href);
+                $('#gameURL').text(window.location.hostname + ":" + window.location.port);
                 App.doTextFit('#gameURL');
 
                 // Show the gameId / room id on screen
-                $('#spanNewGameCode').text(App.gameId);
+                //$('#spanNewGameCode').text(App.gameId);
+                $('#spanNewGameCode').text("");
             },
 
             /**
@@ -285,7 +286,7 @@ jQuery(function($){
                 // Update host screen
                 $('#playersWaiting')
                     .append('<p/>')
-                    .text('Player ' + data.playerName + ' joined the game.');
+                    .text('' + data.playerName + ' এর কেউ ঢুকছে ');
 
                 // Store the new player's data on the Host.
                 App.Host.players.push(data);
@@ -385,7 +386,7 @@ jQuery(function($){
                 
                     App.Host.currentPlayerAnswers.push(data.playerName);
                     
-                    $('#hostWord').text("Round " + App.currentRound + " : " + App.Host.currentPlayerAnswers);
+                    $('#hostWord').text("টিপ দিল এই Round " + App.currentRound + " এ : " + App.Host.currentPlayerAnswers);
                     App.doTextFit('#hostWord');
                 }
             },
@@ -491,6 +492,10 @@ myAudio.play();
             onPlayerStartClick: function() {
                 // console.log('Player clicked "Start"');
 
+                if ( ! $('#inputPlayerName').val()) {
+                    alert("দলের নাম লিখতে ভুলে গেলেন যে ?");
+                    return;
+                }
                 // collect data to send to the server
                 var data = {
                     gameId : "eid",//+($('#inputGameId').val()),
@@ -525,7 +530,7 @@ myAudio.play();
                 }
                 IO.socket.emit('playerAnswer',data);
                 $('#gameArea')
-                    .html('<div class="gameOver">Answer submitted for Round ' + App.currentRound + '</div>');
+                    .html('<div class="gameOver">টিপ গেছে !! দাড়ান  দেখি কে আগে দিল  (Round ' + App.currentRound + ')</div>');
                 buzzSound();
                 
 //                var myAudio = document.createElement('audio');
@@ -569,7 +574,7 @@ myAudio.play();
                     document.getElementById('btnStart').style.visibility = 'hidden';
                     $('#playerWaitingMessage')
                         .append('<p/>')
-                        .text('You are in! Now just wait for the game to begin.');
+                        .text('অনেকেই দেখি এখনো ঢুকে নাই... একটু দাড়ান ! সবাই ঢুকুক ...');
                 }
             },
 
@@ -580,7 +585,7 @@ myAudio.play();
             gameCountdown : function(hostData) {
                 App.Player.hostSocketId = hostData.mySocketId;
                 $('#gameArea')
-                    .html('<div class="gameOver">Get Ready!</div>');
+                    .html('<div class="gameOver">শুরু হচ্ছে কিন্তু !!!</div>');
             },
 
             /**

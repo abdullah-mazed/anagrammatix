@@ -3,7 +3,7 @@
  Dark Green : #78BD4C
   Mid Green : #A8FF56
        Lite : #ECFFE0
-Dark Purple : #A22FB0
+Dark Purple : #FFEEEE
 
 */
 
@@ -142,7 +142,7 @@ html, body {
     width: 200px;
     height: 60px;
     font-family: 'Quicksand', sans-serif;
-    color: #A22FB0;
+    color: #FFEEEE;
     font-weight: 300;
     font-size: 54px;
     border: 1px dotted white;
@@ -181,10 +181,12 @@ html, body {
 
 #playerWaitingMessage {
     font-size: .8em;
+    color: white;
 }
 
 .createGameWrapper #gameURL {
-    font-size: 4em;
+    font-size: 10em;
+    color: yellow;
 }
 
 .createGameWrapper .gameId {
