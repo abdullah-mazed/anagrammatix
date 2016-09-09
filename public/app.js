@@ -348,7 +348,7 @@ jQuery(function($){
 //                $('#hostWord').text(data.word);
                 $('#hostWord').text("Round: " + App.currentRound);
                 App.doTextFit('#hostWord');
-                
+                $('#extra').text("");
                 // Update the data for the current round
                 App.Host.currentCorrectAnswer = data.answer;
                 App.Host.currentRound = data.round;
@@ -393,8 +393,23 @@ jQuery(function($){
                 
                     App.Host.currentPlayerAnswers.push(data.playerName);
                     
-                    $('#hostWord').text("টিপ দিল এই Round " + App.currentRound + " এ : " + App.Host.currentPlayerAnswers);
+//                    $('#hostWord').text("" + App.Host.currentPlayerAnswers[0] + " সবার আগে!");
+                    var result = "";
+                    if (App.Host.currentPlayerAnswers.length == 1) {
+                        result = "" + App.Host.currentPlayerAnswers[0] + " <br> সবার আগে!";
+                        
+                    } else if (App.Host.currentPlayerAnswers.length ==  2) {
+                        result = "" + App.Host.currentPlayerAnswers[0] + " সবার আগে!";
+                        result += "<br>এরপর " + App.Host.currentPlayerAnswers[1];
+                    } else {
+                        result = "আগে " + App.Host.currentPlayerAnswers[0] + "<br>এরপর " + App.Host.currentPlayerAnswers[1] + "," + App.Host.currentPlayerAnswers[2];
+                    }
+                    
+                    
+                    $('#hostWord').html(result);
                     App.doTextFit('#hostWord');
+                    
+                    $('#extra').text("" + App.Host.currentPlayerAnswers);
                 }
             },
             
@@ -546,7 +561,7 @@ myAudio.play();
                 }
                 IO.socket.emit('playerAnswer',data);
                 $('#gameArea')
-                    .html('<div class="gameOver">টিপ গেছে !! দাড়ান  দেখি কে আগে দিল  (Round ' + App.currentRound + ')</div>');
+                    .html('<div class="gameOver">টিপ গেছে !! দাড়ান  দেখি কে আগে দিল </div>');
                 buzzSound();
                 
 //                var myAudio = document.createElement('audio');
@@ -590,7 +605,7 @@ myAudio.play();
                     document.getElementById('btnStart').style.visibility = 'hidden';
                     $('#playerWaitingMessage')
                         .append('<p/>')
-                        .text('অনেকেই দেখি এখনো ঢুকে নাই... একটু দাড়ান ! সবাই ঢুকুক ...');
+                        .text('গগন ভাই কে জানান "' + data.playerName + '" গেমে যোগ দিয়েছে। এরপর একটু শান্ত হয়ে বসুন :)');
                 }
             },
 
