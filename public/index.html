@@ -22,12 +22,18 @@
 <body>
 
     <audio id="buzzsound" src="sound/buzz.wav"></audio>
+    <audio id="joinsound" src="sound/join.wav"></audio>
     
     <script>
     function buzzSound(){
        var audio = document.getElementById("buzzsound");
        audio.play();
                  }
+        
+    function joinSound(){
+       var audio = document.getElementById("joinsound");
+       audio.play();
+    }
    </script>
 
     <div id="gameArea">
@@ -45,7 +51,7 @@
 
             <div class="buttons">
 
-                <button id="btnJoinGame" class="btn" onclick="buzzSound()"> Join  </button>
+                <button id="btnJoinGame" class="btn"> Join  </button>
                 <div style="clear:both"></div>
             </div>
 
@@ -75,7 +81,7 @@
     <!-- This screen appears when a user clicks "CREATE" on the Title Screen -->
     <script id="create-game-template" type="text/template">
         <div class="buttons">
-            <button id="btnFirstRound" class="btn"> শুরু </button>
+            <button id="btnFirstRound" class="btn" > শুরু </button>
         </div>
         <div class="createGameWrapper">
 
@@ -99,7 +105,7 @@
 
 
             <div class="info buttons">
-                <button id="btnStart" class="btn"> শুরু </button>
+                <button id="btnStart" class="btn" onclick="joinSound()"> শুরু </button>
                 <div id="playerWaitingMessage"></div>
             </div>
         </div>
