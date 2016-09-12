@@ -561,7 +561,7 @@ myAudio.play();
                 }
                 IO.socket.emit('playerAnswer',data);
                 $('#gameArea')
-                    .html('<div class="gameOver">টিপ গেছে !! দাড়ান  দেখি কে আগে দিল </div>');
+                    .html('<div class="gameOver">এই পর্বের জন্য buzzer এর কাজ শেষ। পরের প্রশ্নের সময় আবার চালু করা হবে। অপেক্ষা করুন।  </div>');
                 buzzSound();
                 
 //                var myAudio = document.createElement('audio');
